@@ -1,8 +1,12 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "color.h"
 #include "fonction.h"
+#include "random.h"
+#include <string.h>
 
+char liste_couleur[4] = {'r','b','g','y'};
 
 int nb_Red(Voisin cell){
   int nb_red = 0;
@@ -81,9 +85,56 @@ Voisin color_of_neighbour(char colored_grid[35][100], int i, int j){
   return cell;
 }
 
-void initialize_grid_with_color(char blank_grid[35][100], char nb_color[4]){
+
+void initialize_grid_with_color(char grid_to_color[35][100], char colored_grid[35][100]){
   //renvoie une grille coloree aleatoirement
+  bool premier_passage = true;
+  for(int repetition = 0; repetition < 1; repetition++){
+    for(int i = 0; i < 35; i++){
+      for(int j = 0; j < 100; j++){
+        char old_cell = grid_to_color[i][j];
+        Voisin neighboring_cells = color_of_neighbour(grid_to_color, i, j);
+        if(old_cell == 'w' && neighboring_cells.color_up == 'w' && neighboring_cells.color_down == 'w' && neighboring_cells.color_left == 'w' && neighboring_cells.color_right == 'w' && premier_passage){
+          if(random(5)){
+            char couleur = random_pick(liste_couleur, 4);
+            grid_to_color[i][j] = couleur;
+            grid_to_color[i + 1][j] = couleur;
+            grid_to_color[i - 1][j] = couleur;
+            grid_to_color[i][j + 1] = couleur;
+            grid_to_color[i][j - 1] = couleur;
+          }
+        }else if(old_cell == 'w' && neighboring_cells.nbRed + neighboring_cells.nbBlue + neighboring_cells.nbGreen + neighboring_cells.nbYellow > 0){
+          int taille_liste = 0;
+          char liste_couleurs_voisines[4] = {'\0'};
+          if (neighboring_cells.color_up != 'w' && neighboring_cells.color_up != '*'){
+            liste_couleurs_voisines[0] = neighboring_cells.color_up;
+            taille_liste++;
+          }else if (neighboring_cells.color_down != 'w' && neighboring_cells.color_down != '*'){
+            liste_couleurs_voisines[1] = neighboring_cells.color_down;
+            taille_liste++;
+          }else if (neighboring_cells.color_left != 'w' && neighboring_cells.color_left != '*'){
+            liste_couleurs_voisines[2] = neighboring_cells.color_left;
+            taille_liste++;
+          }else if (neighboring_cells.color_right != 'w' && neighboring_cells.color_right != '*'){
+            liste_couleurs_voisines[3] = neighboring_cells.color_right;
+            taille_liste++;
+          }
+          char couleur_aux = random_pick(liste_couleurs_voisines, taille_liste);
+          grid_to_color[i][j] = couleur_aux;
+        }else if(old_cell == '*'){
+          grid_to_color[i][j] = '*';
+        }
+      }
+    }
+    premier_passage = false;
+  }
+  for(int i = 0; i < 35; i++){
+    for(int j = 0; j < 100; j++){
+      colored_grid[i][j] = grid_to_color[i][j];
+    }
+  }
 }
+
 
 void grid_initialization(char grid_result[35][100]){
 //On suppose que la grille est exactement de taille 100
@@ -93,6 +144,35 @@ void grid_initialization(char grid_result[35][100]){
       scanf("%c ", &land);
       grid_result[i][j] = land;
     }
+  }
+}
+
+void from_char_to_number(char lettre, char couleur[5]){
+  if(lettre == 'w'){
+    strcpy(couleur, "0;37");
+  }else if(lettre == 'r'){
+    strcpy(couleur, "0;31");;
+  }else if(lettre == 'b'){
+    strcpy(couleur, "0;34");
+  }else if(lettre == 'g'){
+    strcpy(couleur, "0;92");
+  }else if(lettre == 'y'){
+    strcpy(couleur, "0;93");
+  }else if(lettre == '*'){
+    strcpy(couleur, "0;90");
+  }
+}
+
+void print_colored_grid(char colored_grid[35][100]){
+  for(int i = 0; i < 35; i++){
+    for(int j = 0; j < 100; j++){
+      char couleur[5] = {'\0'};
+      from_char_to_number(colored_grid[i][j], couleur);
+      color(couleur);
+      printf("%c", colored_grid[i][j]);
+      color("0");
+    }
+    printf("\n");
   }
 }
 
