@@ -73,6 +73,8 @@ void create_colored_grid(char grid[35][100], char colored_grid[35][100]){
         colored_grid[i][j] = '*';
       }else if(grid[i][j] == '@'){
         colored_grid[i][j] = 'w';
+      }else if(grid[i][j] == 'X'){
+        colored_grid[i][j] = 'X';
       }
     }
   }
@@ -85,48 +87,25 @@ Voisin color_of_neighbour(char colored_grid[35][100], int i, int j){
   return cell;
 }
 
-
-void initialize_grid_with_color(char grid_to_color[35][100], char colored_grid[35][100]){
-  //renvoie une grille coloree aleatoirement
-  bool premier_passage = true;
-  for(int repetition = 0; repetition < 1; repetition++){
-    for(int i = 0; i < 35; i++){
-      for(int j = 0; j < 100; j++){
-        char old_cell = grid_to_color[i][j];
-        Voisin neighboring_cells = color_of_neighbour(grid_to_color, i, j);
-        if(old_cell == 'w' && neighboring_cells.color_up == 'w' && neighboring_cells.color_down == 'w' && neighboring_cells.color_left == 'w' && neighboring_cells.color_right == 'w' && premier_passage){
-          if(random(5)){
-            char couleur = random_pick(liste_couleur, 4);
-            grid_to_color[i][j] = couleur;
-            grid_to_color[i + 1][j] = couleur;
-            grid_to_color[i - 1][j] = couleur;
-            grid_to_color[i][j + 1] = couleur;
-            grid_to_color[i][j - 1] = couleur;
-          }
-        }else if(old_cell == 'w' && neighboring_cells.nbRed + neighboring_cells.nbBlue + neighboring_cells.nbGreen + neighboring_cells.nbYellow > 0){
-          int taille_liste = 0;
-          char liste_couleurs_voisines[4] = {'\0'};
-          if (neighboring_cells.color_up != 'w' && neighboring_cells.color_up != '*'){
-            liste_couleurs_voisines[0] = neighboring_cells.color_up;
-            taille_liste++;
-          }else if (neighboring_cells.color_down != 'w' && neighboring_cells.color_down != '*'){
-            liste_couleurs_voisines[1] = neighboring_cells.color_down;
-            taille_liste++;
-          }else if (neighboring_cells.color_left != 'w' && neighboring_cells.color_left != '*'){
-            liste_couleurs_voisines[2] = neighboring_cells.color_left;
-            taille_liste++;
-          }else if (neighboring_cells.color_right != 'w' && neighboring_cells.color_right != '*'){
-            liste_couleurs_voisines[3] = neighboring_cells.color_right;
-            taille_liste++;
-          }
-          char couleur_aux = random_pick(liste_couleurs_voisines, taille_liste);
-          grid_to_color[i][j] = couleur_aux;
-        }else if(old_cell == '*'){
-          grid_to_color[i][j] = '*';
-        }
+void paint_around_X(int i, int j,char grid_to_color[35][100]){
+  char couleur = random_pick(liste_couleur, 4);//Faire attention a regarder plus tard le nb de joueurs
+  for(int k = i - 4; k <= i + 4; k++){
+    for(int l = j - 4; l <= j + 4; l++){
+      if(grid_to_color[k][l] == 'w'){
+        grid_to_color[k][l] = couleur;
       }
     }
-    premier_passage = false;
+  }
+}
+
+void initialize_grid_with_color(char grid_to_color[35][100], char colored_grid[35][100]){
+  for(int i = 0; i < 35; i++){
+    for(int j = 0; j < 100; j++){
+      char cell = grid_to_color[i][j];
+      if(cell == 'X'){
+        paint_around_X(i,j,grid_to_color);
+      }
+    }
   }
   for(int i = 0; i < 35; i++){
     for(int j = 0; j < 100; j++){
@@ -134,6 +113,7 @@ void initialize_grid_with_color(char grid_to_color[35][100], char colored_grid[3
     }
   }
 }
+
 
 
 void grid_initialization(char grid_result[35][100]){
