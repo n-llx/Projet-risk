@@ -8,111 +8,7 @@
 
 char liste_couleur[4] = {'r','b','g','y'};
 
-int nb_Red(Voisin cell){
-  int nb_red = 0;
-  if(cell.color_up == 'r'){
-    nb_red++;
-  }else if(cell.color_down == 'r'){
-    nb_red++;
-  }else if(cell.color_left == 'r'){
-    nb_red++;
-  }else if(cell.color_left == 'r'){
-    nb_red++;
-  }
-  return nb_red;
-}
 
-int nb_Blue(Voisin cell){
-  int nb_blue = 0;
-  if(cell.color_up == 'b'){
-    nb_blue++;
-  }else if(cell.color_down == 'b'){
-    nb_blue++;
-  }else if(cell.color_left == 'b'){
-    nb_blue++;
-  }else if(cell.color_left == 'b'){
-    nb_blue++;
-  }
-  return nb_blue;
-}
-
-int nb_Green(Voisin cell){
-  int nb_green = 0;
-  if(cell.color_up == 'g'){
-    nb_green++;
-  }else if(cell.color_down == 'g'){
-    nb_green++;
-  }else if(cell.color_left == 'g'){
-    nb_green++;
-  }else if(cell.color_left == 'g'){
-    nb_green++;
-  }
-  return nb_green;
-}
-
-int nb_Yellow(Voisin cell){
-  int nb_yellow = 0;
-  if(cell.color_up == 'y'){
-    nb_yellow++;
-  }else if(cell.color_down == 'y'){
-    nb_yellow++;
-  }else if(cell.color_left == 'y'){
-    nb_yellow++;
-  }else if(cell.color_left == 'y'){
-    nb_yellow++;
-  }
-  return nb_yellow;
-}
-
-void create_colored_grid(char grid[35][100], char colored_grid[35][100]){
-  // on remplace les caracteres par des couleurs.
-  // le '*' est la couleur nulle. Au depart toutes les cases sont blanches/
-  for(int i = 0; i < 35; i++){
-    for(int j = 0; j < 100; j++){
-      if(grid[i][j] == '/'){
-        colored_grid[i][j] = '*';
-      }else if(grid[i][j] == '@'){
-        colored_grid[i][j] = 'w';
-      }else if(grid[i][j] == 'X'){
-        colored_grid[i][j] = 'X';
-      }
-    }
-  }
-}
-
-Voisin color_of_neighbour(char colored_grid[35][100], int i, int j){
-// Les 4 coins ne seront jamais pris en compte, il ne doit donc pas y avoir de terre
-// Il est necessaire de prendre des coordonnes entre 1 et i - 1 et 1 et j - 1 pour eviter le depassement
-  Voisin cell = {colored_grid[i - 1][j], colored_grid[i + 1][j], colored_grid[i][j - 1], colored_grid[i][j + 1], nb_Red(cell), nb_Blue(cell), nb_Green(cell), nb_Yellow(cell)};
-  return cell;
-}
-
-void paint_around_X(int i, int j,char grid_to_color[35][100]){
-  char couleur = random_pick(liste_couleur, 4);//Faire attention a regarder plus tard le nb de joueurs
-  for(int k = i - 4; k <= i + 4; k++){
-    for(int l = j - 4; l <= j + 4; l++){
-      if(grid_to_color[k][l] == 'w'){
-        grid_to_color[k][l] = couleur;
-      }
-    }
-  }
-}
-
-void initialize_grid_with_color(char grid_to_color[35][100], char colored_grid[35][100]){
-  for(int i = 0; i < 35; i++){
-    for(int j = 0; j < 100; j++){
-      char cell = grid_to_color[i][j];
-      if(cell == 'X'){
-        paint_around_X(i,j,grid_to_color);
-      }
-    }
-  }
-  for(int i = 0; i < 35; i++){
-    for(int j = 0; j < 100; j++){
-      colored_grid[i][j] = grid_to_color[i][j];
-    }
-  }
-}
 
 
 
@@ -165,4 +61,41 @@ void print_grid(char grid[35][100]){
   }
 }
 
+void print_grid_aux(Coords grid[26][200]){
+  for(int i = 0; i < 26; i++){
+    for(int j = 0; j < 200; j++){
+      printf("{%d;%d} - ", grid[i][j].x, grid[i][j].y);
+    }
+    printf("\n");
+  }
+}
+  
 
+void grille_liste_territoire(char grid[35][100], Coords liste_territoire[26][200]){
+  
+  for(int i = 65; i <= 90; i++){
+    char lettre_majuscule = i;
+    for(int k = 0; k < 35; k++){
+      for(int l = 0; l < 100; l++){
+        if(grid[k][l] == lettre_majuscule){
+          Coords coordonnes = {k, l};
+          liste_territoire[i-65][0] = coordonnes;
+        }
+      }
+    }
+  }
+  int compteur = 1;
+  for(int i = 97; i <= 122; i++){
+    compteur = 1;
+    char lettre_minuscule = i;
+    for(int k = 0; k < 35; k++){
+      for(int l = 0; l < 100; l++){
+        if(grid[k][l] == lettre_minuscule){
+          Coords coordonnes = {k, l};
+          liste_territoire[i-97][compteur] = coordonnes;
+          compteur++;
+        }
+      }
+    }
+  }
+}
