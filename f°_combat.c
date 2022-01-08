@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "fonction_auxiliaire_combat.c"
+#include "fonction_auxiliaire_combat_affichage.c"
 // #include "matrice_du_graphe.c"
 // #include "information_territores.c"
+
 
 int fonction_combat(int tab_attaquant[], int tab_defenseur[], int phase, int matrice_du_graphe[4][4]){
     
@@ -31,8 +32,13 @@ int fonction_combat(int tab_attaquant[], int tab_defenseur[], int phase, int mat
         return -1;
     }
     
-
+    
     int desision = devenir_du_combat();
+    
+    // En fait on clear le l'écran parce que on ne veut plus voir les questions posées par informe_joueur 
+    char des[3][7]; // Les dés sont inutiles maintenant, il faut juste donner assez d'argument pour la fonction affiche plateau
+    clearScreen();
+    fonction_affichage_plateau(40, 182, carte, 0, 0, des);
 
     if (desision == 1){
         fonction_combat(tab_attaquant, tab_defenseur, 1, matrice_du_graphe);
