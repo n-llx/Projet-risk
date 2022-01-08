@@ -9,7 +9,7 @@
 char liste_couleur[4] = {'r','b','g','y'};
 
 
-
+void initialisation_jeu()
 
 
 void grid_initialization(char grid_result[35][100]){
@@ -61,7 +61,7 @@ void print_grid(char grid[35][100]){
   }
 }
 
-void print_grid_aux(Coords grid[26][200]){
+void print_grid_aux(Coords grid[30][200]){
   for(int i = 0; i < 26; i++){
     for(int j = 0; j < 200; j++){
       printf("{%d;%d} - ", grid[i][j].x, grid[i][j].y);
@@ -71,7 +71,7 @@ void print_grid_aux(Coords grid[26][200]){
 }
   
 
-void grille_liste_territoire(char grid[35][100], Coords liste_territoire[26][200]){
+void grille_liste_territoire(char grid[35][100], Coords liste_territoire[30][200]){
   
   for(int i = 65; i <= 90; i++){
     char lettre_majuscule = i;
