@@ -37,7 +37,7 @@ void fonction_affichage_plateau (int n, int m, char carte[n][m], int k, int l, c
 
 void clearScreen()
 {
-  const char *CLEAR_SCREEN_ANSI = "\e[1;1H\e[2J";
+  const char *CLEAR_SCREEN_ANSI = "\033[1;1H\033[2J";
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, 15);
 }
 
