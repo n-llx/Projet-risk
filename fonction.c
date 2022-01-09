@@ -1,16 +1,52 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "color.h"
 #include "fonction.h"
 #include "random.h"
 #include <string.h>
 
 char liste_couleur[4] = {'r','b','g','y'};
+int nombre_territoire = 6;
 
 
-void initialisation_jeu()
+void initialisation_jeu(int nombre_joueurs, int nb_territoire, char map[35][100], Coords liste_territoire[30][200], char map_colored[35][100], InfoCase info_territoire[6]){
+  print_grid(map);
+//  char liste_territoires_deja_choisis[6] = {'\0', '\0', '\0', '\0', '\0', '\0'};
+  for(int i = 0; i < nb_territoire; i++){
+    printf("Joueur %c, sur quel territoire voulez vous installer vos troupes ? \n", liste_couleur[i%4]);
+    char territoire_choisi = '\0';
+    scanf(" %c", &territoire_choisi);
+    printf("Le territoire choisi est %c", territoire_choisi);
+/*    if (est_dans_la_liste(territoire_choisi, liste_territoires_deja_choisis)){
+      printf("Territoire invalide ! On recommence tout !");
+      printf("\033[1;1H\033[2J");
+      initialisation_jeu(nombre_joueurs, nb_territoire, map, liste_territoire, map_colored, info_territoire);
+    }else if(liste_territoire[65 - territoire_choisi][0].x != 0){
+//      liste_territoires_deja_choisis[65 - territoire_choisi] = territoire_choisi;
+      InfoCase info_one_territory = {territoire_choisi, 0, liste_couleur[i%4]};
+      printf("Combien de troupes voulez vous deposer ? \n");
+      int nb_troupe = 0;
+      scanf("%d", &nb_troupe);
+      info_one_territory.nombre_de_troupe = nb_troupe;
+      info_territoire[65 - territoire_choisi] = info_one_territory;
+    }else{
+      printf("Territoire invalide ! On recommence tout !");
+      printf("\033[1;1H\033[2J");
+      initialisation_jeu(nombre_joueurs, nb_territoire, map, liste_territoire, map_colored, info_territoire);
+    } */
+  }
+}
 
+bool est_dans_la_liste (char element, char liste[6]){
+  for(int i = 0; i < 6; i++){
+    if(liste[i] == element){
+      return false;
+    }
+  }
+  return true;
+}
 
 void grid_initialization(char grid_result[35][100]){
 //On suppose que la grille est exactement de taille 100
