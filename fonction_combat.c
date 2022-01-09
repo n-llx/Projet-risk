@@ -18,7 +18,7 @@ int fonction_combat(InfoCase attaquant, InfoCase defenseur, int phase, int matri
     }
     
     int tab_perte_troupe[2] = {0,0};
-    un_combat(attaquant.nombre_de_troupe, defenseur.nombre_de_troupe, tab_perte_troupe);
+    un_combat(attaquant.nombre_de_troupe, defenseur.nombre_de_troupe, tab_perte_troupe, grille_jeu);
 
     attaquant.nombre_de_troupe += tab_perte_troupe[0];
     defenseur.nombre_de_troupe += tab_perte_troupe[1];
@@ -36,7 +36,12 @@ int fonction_combat(InfoCase attaquant, InfoCase defenseur, int phase, int matri
     int desision = devenir_du_combat();
     
     // En fait on clear le l'écran parce que on ne veut plus voir les questions posées par informe_joueur 
-    char des[3][7]; // Les dés sont inutiles maintenant, il faut juste donner assez d'argument pour la fonction affiche plateau
+    // Les dés sont inutiles maintenant, il faut juste donner assez d'argument pour la fonction affiche plateau
+    char des[3][7] = {
+        {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' '}
+    };
     clearScreen();
     fonction_affichage_plateau(40, 182, grille_jeu, 0, 0, des);
 
