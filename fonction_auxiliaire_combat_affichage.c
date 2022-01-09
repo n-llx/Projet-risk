@@ -172,7 +172,7 @@ void tri_resultat(int n, int tab[n]){
     }
 }
 
-int un_combat(int attaquant, int defenseur, int perte_troupe[2]){  
+int un_combat(int attaquant, int defenseur, int perte_troupe[2], char grille_jeu[35][100]){  
 /* On effectue les lances de de, on les affichent puis ils sont enregistre dans un tableau que l'on va trie avec la fonction tri_resultat.*/
 
     // Fonction utilise : affiche_matrice, affiche_de, tris_resultat.
