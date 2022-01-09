@@ -1,5 +1,17 @@
-char liste_couleur[4] = {'r','b','g','y'};
 int nombre_territoire = 6;
+int matrice_adjacence[nombre_territoire][nombre_territoire] =
+{
+{0, 1, 0, 0, 0, 0},
+{1, 0, 1, 0, 0, 0},
+{0, 1, 0, 1, 0, 0},
+{0, 0, 1, 0, 1, 0},
+{0, 0, 0, 1, 0, 1},
+{0, 0, 0, 0, 1, 0},
+};
+
+char liste_couleur[4] = {'r','b','g','y'};
+
+
 
 #include <stdbool.h>
 #include <stdio.h>

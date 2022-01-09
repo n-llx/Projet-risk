@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fonction_auxiliaire_combat_affichage.c"
-#include "fonction.c"
+#include "fonction.h"
 
 
 int fonction_combat(InfoCase attaquant, InfoCase defenseur, int phase, int matrice_du_graphe[6][6]){
