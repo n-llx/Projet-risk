@@ -1,5 +1,5 @@
 int nombre_territoire = 6;
-int matrice_adjacence[nombre_territoire][nombre_territoire] =
+int matrice_adjacence[nombre_territoire + 1][nombre_territoire + 1] =
 {
 {0, 1, 0, 0, 0, 0},
 {1, 0, 1, 0, 0, 0},
