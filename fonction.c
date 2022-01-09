@@ -221,5 +221,6 @@ bool sb_win_fun (InfoCase info_territoire[6]){
     if (territorie_f){
         return true;
     }
+    return false;
   }
-}
+
