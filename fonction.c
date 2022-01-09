@@ -149,3 +149,76 @@ void grille_liste_territoire(char grid[35][100], Coords liste_territoire[30][200
     }
   }
 }
+
+bool sb_win_fun (InfoCase info_territoire[6]){
+    
+    bool territorie_a= true;
+    bool territorie_b= true;
+    bool territorie_c= true;
+    bool territorie_d= true;
+    bool territorie_e= true;
+    bool territorie_f= true;
+
+    for (int i = 0; i<6; i++){
+        if (info_territoire[i].nom_de_la_case == 'A'){
+            territorie_b= false;
+            territorie_c= false;
+            territorie_d= false;
+            territorie_e= false;
+            territorie_f= false;
+        }
+        if (info_territoire[i].nom_de_la_case == 'B'){
+            territorie_a= false;
+            territorie_c= false;
+            territorie_d= false;
+            territorie_e= false;
+            territorie_f= false;
+        }
+        if (info_territoire[i].nom_de_la_case == 'C'){
+            territorie_b= false;
+            territorie_a= false;
+            territorie_d= false;
+            territorie_e= false;
+            territorie_f= false;
+        }
+        if (info_territoire[i].nom_de_la_case == 'D'){
+            territorie_b= false;
+            territorie_c= false;
+            territorie_a= false;
+            territorie_e= false;
+            territorie_f= false;
+        }
+        if (info_territoire[i].nom_de_la_case == 'E'){
+            territorie_b= false;
+            territorie_c= false;
+            territorie_d= false;
+            territorie_a= false;
+            territorie_f= false;
+        }
+        if (info_territoire[i].nom_de_la_case == 'F'){
+            territorie_b= false;
+            territorie_c= false;
+            territorie_d= false;
+            territorie_e= false;
+            territorie_a= false;
+        }
+    }
+    if (territorie_a){
+        return true;
+    }
+    if (territorie_b){
+        return true;
+    }
+    if (territorie_c){
+        return true;
+    }
+    if (territorie_d){
+        return true;
+    }
+    if (territorie_e){
+        return true;
+    }
+    if (territorie_f){
+        return true;
+    }
+}
