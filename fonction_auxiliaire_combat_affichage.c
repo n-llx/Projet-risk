@@ -219,7 +219,7 @@ int un_combat(int attaquant, int defenseur, int perte_troupe[2]){
             char des[3][7];
             affiche_de(resulat, des);
             clearScreen();
-            fonction_affichage_plateau(35, 100, carte, 3, 7, des);
+            fonction_affichage_plateau(35, 100, grille_jeu, 3, 7, des);
         }
     
         tri_resultat(3, resulat_attaque);
@@ -242,7 +242,7 @@ int un_combat(int attaquant, int defenseur, int perte_troupe[2]){
             char des[3][7];
             affiche_de(resulat, des);
             clearScreen();
-            fonction_affichage_plateau(35, 100, carte, 3, 7, des);
+            fonction_affichage_plateau(35, 100, grille_jeu, 3, 7, des);
         }
     
         tri_resultat(2, resulat_defense);
@@ -384,6 +384,7 @@ int oui_ou_non(char s[10]){
     else {
         return -1;
     }
+    return  0;
 }
 
 int devenir_du_combat() {
@@ -405,7 +406,7 @@ int devenir_du_combat() {
         printf ("Sans fautes d'orthographes\n");
         return devenir_du_combat();
     }
-    
+    return 1;    
 }
 int desir_de_combat() {
 /* Après chaque attaque, il s'agira de s'informer si l'attaquant continue */    
