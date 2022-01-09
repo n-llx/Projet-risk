@@ -224,3 +224,25 @@ bool sb_win_fun (InfoCase info_territoire[6]){
     return false;
   }
 
+
+void fonction_renfort(InfoCase info_territoire[6], char joueur_n){
+  
+  int nb_de_soldat = 5;
+  
+  printf("Vous avez 5 soldats de plus !\n");
+  printf ("Ou voulez-vous les mettres ?");
+  
+  
+  while ((nb_de_soldat =! 0)){
+    printf ("Renseigner le territoire puis suivi d'un espace le nombre de troupe à y placer\n");
+    char territoire;
+    int nb_troupe = 0;
+    scanf ("%c %d ", &territoire, &nb_troupe);
+
+    info_territoire[joueur_n - 'A'].nombre_de_troupe += nb_troupe;
+
+    nb_de_soldat -= nb_troupe;
+  }
+
+}
+
