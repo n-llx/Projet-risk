@@ -225,7 +225,7 @@ bool sb_win_fun (InfoCase info_territoire[6]){
   }
 
 
-void fonction_renfort(InfoCase info_territoire[6], char joueur_n){
+void fonction_renfort(InfoCase info_territoire[6]){
   
   int nb_de_soldat = 5;
   
@@ -239,7 +239,7 @@ void fonction_renfort(InfoCase info_territoire[6], char joueur_n){
     int nb_troupe = 0;
     scanf ("%c %d ", &territoire, &nb_troupe);
 
-    info_territoire[joueur_n - 'A'].nombre_de_troupe += nb_troupe;
+    info_territoire[territoire - 'A'].nombre_de_troupe += nb_troupe;
 
     nb_de_soldat -= nb_troupe;
   }
