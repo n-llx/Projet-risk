@@ -15,7 +15,7 @@ void affiche_matrice (int n, int m, char matrice[n][m]){
         }
 }
 
-void met_matrice_dans_matrice (int n, int m, char matrice_a_ranger[n][m], char matrice_de_rangement[45][182], int position_voulue_x, int position_voulue_y) {    
+void met_matrice_dans_matrice (int n, int m, char matrice_a_ranger[n][m], char matrice_de_rangement[35][182], int position_voulue_x, int position_voulue_y) {    
     /* On range une matrice dans une grosse matrice */
     for (int i = 0; i<n; i++){
         for (int j = 0; i<m; j++){
