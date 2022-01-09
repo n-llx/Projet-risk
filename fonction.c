@@ -1,3 +1,6 @@
+char liste_couleur[4] = {'r','b','g','y'};
+int nombre_territoire = 6;
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,8 +10,6 @@
 #include "random.h"
 #include <string.h>
 
-char liste_couleur[4] = {'r','b','g','y'};
-int nombre_territoire = 6;
 
 
 void initialisation_jeu(int nombre_joueurs, int nb_territoire, char map[35][100], Coords liste_territoire[30][200], char map_colored[35][100], InfoCase info_territoire[6]){
