@@ -263,7 +263,7 @@ int un_combat(int attaquant, int defenseur, int perte_troupe[2]){
             char des[3][7];
             affiche_de(resulat, des);
             clearScreen();
-            fonction_affichage_plateau(35, 100, carte, 3, 7, des);
+            fonction_affichage_plateau(35, 100, grille_jeu, 3, 7, des);
         }
     
         
@@ -354,6 +354,7 @@ int informe_joueur(int info, int phase){
         if (info == 1){
             return 0;
         }
+        return -5;
 }
 
 int oui_ou_non(char s[10]){
