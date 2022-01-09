@@ -4,7 +4,8 @@
 #include "fonction.h"
 
 
-int fonction_combat(InfoCase attaquant, InfoCase defenseur, int phase, int matrice_du_graphe[6][6]){
+
+int fonction_combat(InfoCase attaquant, InfoCase defenseur, int phase, int matrice_du_graphe[6][6],char grille_jeu[35][100]){
     
     // La phase 0 correspond à la toute première attaque du tour
     if (phase == 0){
@@ -37,10 +38,10 @@ int fonction_combat(InfoCase attaquant, InfoCase defenseur, int phase, int matri
     // En fait on clear le l'écran parce que on ne veut plus voir les questions posées par informe_joueur 
     char des[3][7]; // Les dés sont inutiles maintenant, il faut juste donner assez d'argument pour la fonction affiche plateau
     clearScreen();
-    fonction_affichage_plateau(40, 182, carte, 0, 0, des);
+    fonction_affichage_plateau(40, 182, grille_jeu, 0, 0, des);
 
     if (desision == 1){
-        fonction_combat(attaquant, defenseur, 1, matrice_du_graphe);
+        fonction_combat(attaquant, defenseur, 1, matrice_du_graphe, grille_jeu);
     }
     else {
         return -2;
