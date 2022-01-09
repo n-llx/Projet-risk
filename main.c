@@ -25,7 +25,7 @@ int main(void){
     
     printf ("C'est au joueur %c de jouer !\n", tour_du_joueur_n);
 
-    fonction_renfort(information_territoires, tour_du_joueur_n);
+    fonction_renfort(information_territoires);
 
     
     int desir_combat = desir_de_combat();
